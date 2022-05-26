@@ -1,6 +1,7 @@
 ﻿using Data.DAL;
 using Data.Models;
 using Microsoft.AspNetCore.Mvc;
+using PustokMVC.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,8 +18,16 @@ namespace PustokMVC.Controllers
 
         public IActionResult Index()
         {
+            HomeVM homeVM = new HomeVM();
+
             List<Slider> sliders = _context.Sliders.ToList();
-            return View(sliders);
+
+            homeVM.Sliders = _context.Sliders.ToList();
+            homeVM.Features = _context.Features.ToList();
+            homeVM.SimplePromotions = _context.SimplePromotions.ToList();
+            homeVM.ComplexPromotions = _context.ComplexPromotions.ToList();
+
+            return View(homeVM);
         }
     }
 }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Data.Models
 {
-    public class Slider : BaseEntity
+    public class ComplexPromotion : BaseEntity
     {
-        public string Title1 { get; set; }
-        public string Title2 { get; set; }
-        public string Description { get; set; }
+        public string Title { get; set; }
+        public string SubTitle { get; set; }
         public string RedirectUrl { get; set; }
         public string RedirectUrlText { get; set; }
         public string Image { get; set; }
-        public int Order { get; set; }
+        public string PromotionSize { get; set; }
     }
 }
