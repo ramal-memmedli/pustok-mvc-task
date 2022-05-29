@@ -16,5 +16,7 @@ namespace Data.DAL
         public DbSet<Feature> Features { get; set; }
         public DbSet<SimplePromotion> SimplePromotions { get; set; }
         public DbSet<ComplexPromotion> ComplexPromotions { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
