@@ -169,11 +169,11 @@
                                 <div>
                                     <a href="javascript:void(0)" class="category-trigger"><i
                                             class="fa fa-bars"></i>Browse
-                                        categories</a>
+                                        genres</a>
                                     <ul class="category-menu">
-                                        @foreach (Category category in Model.Categories)
+                                        @foreach (Genre genre in Model.Genres)
                                         {
-                                            <li class="cat-item"><a href="#">@category.Name</a></li>
+                                            <li class="cat-item"><a href="#">@genre.Name</a></li>
                                         }
                                         
                                     </ul>

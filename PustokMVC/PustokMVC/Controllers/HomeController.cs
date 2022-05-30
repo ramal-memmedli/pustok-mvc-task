@@ -27,8 +27,10 @@ namespace PustokMVC.Controllers
             homeVM.Features = _context.Features.Where(n => !n.IsDeleted).ToList();
             homeVM.SimplePromotions = _context.SimplePromotions.Where(n => !n.IsDeleted).ToList();
             homeVM.ComplexPromotions = _context.ComplexPromotions.Where(n => !n.IsDeleted).ToList();
-            homeVM.Categories = _context.Categories.Where(n => !n.IsDeleted).ToList();
-            homeVM.Products = _context.Products.Where(n => !n.IsDeleted).Include(x => x.Category).ToList();
+            homeVM.Genres = _context.Genres.Where(n => !n.IsDeleted).ToList();
+            homeVM.FeaturedProducts = _context.Products.Where(n => !n.IsDeleted && n.IsFeatured).Include(n => n.Author).Take(10).ToList();
+            homeVM.NewProducts = _context.Products.Where(n => !n.IsDeleted && n.IsNew).Include(n => n.Author).Take(10).ToList();
+            homeVM.DiscountedProducts = _context.Products.Where(n => !n.IsDeleted && n.DiscountPrice > 0).Include(n => n.Author).Take(10).ToList();
 
             return View(homeVM);
         }

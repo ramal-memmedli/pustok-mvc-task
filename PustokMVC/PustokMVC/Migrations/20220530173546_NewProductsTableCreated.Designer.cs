@@ -4,14 +4,16 @@ using Data.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace PustokMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220530173546_NewProductsTableCreated")]
+    partial class NewProductsTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,6 +28,9 @@ namespace PustokMVC.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -39,6 +44,8 @@ namespace PustokMVC.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Authors");
                 });
@@ -260,10 +267,17 @@ namespace PustokMVC.Migrations
                     b.ToTable("Sliders");
                 });
 
+            modelBuilder.Entity("Data.Models.Author", b =>
+                {
+                    b.HasOne("Data.Models.Author", null)
+                        .WithMany("Authors")
+                        .HasForeignKey("AuthorId");
+                });
+
             modelBuilder.Entity("Data.Models.Product", b =>
                 {
                     b.HasOne("Data.Models.Author", "Author")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -281,7 +295,7 @@ namespace PustokMVC.Migrations
 
             modelBuilder.Entity("Data.Models.Author", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Authors");
                 });
 
             modelBuilder.Entity("Data.Models.Genre", b =>
